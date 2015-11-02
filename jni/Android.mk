@@ -1,24 +1,6 @@
 TOP_PATH := $(call my-dir)/..
 
-###########
-# Lib USB #
-###########
 
-LOCAL_PATH := $(TOP_PATH)/libusb
-
-include $(CLEAR_VARS)
-
-LOCAL_CFLAGS := \
--DHAVE_CONFIG_H
-
-LOCAL_SRC_FILES := \
-usb.c \
-error.c \
-descriptors.c \
-linux.c \
-
-LOCAL_MODULE := libusb
-include $(BUILD_SHARED_LIBRARY)
 
 ###########
 # TermCap #
@@ -93,6 +75,59 @@ tilde.c
 LOCAL_MODULE := libreadline
 include $(BUILD_SHARED_LIBRARY)
 
+
+################
+# Lib Lua #
+################
+
+LOCAL_PATH := $(TOP_PATH)/proxmark3/liblua
+
+include $(CLEAR_VARS)
+
+
+LOCAL_CFLAGS := \
+-O2 -Wall -DLUA_COMPAT_ALL 
+
+LOCAL_SRC_FILES := \
+	lapi.c \
+	lcorolib.c \
+	ldump.c \
+	llex.c \
+	lopcodes.c \
+	lstrlib.c \
+	luac.c \
+	lauxlib.c \
+	lctype.c \
+	lfunc.c \
+	lmathlib.c \
+	loslib.c \
+	ltable.c \
+	lundump.c \
+	lbaselib.c \
+	ldblib.c \
+	lgc.c \
+	lmem.c \
+	lparser.c \
+	ltablib.c \
+	lvm.c \
+	lbitlib.c \
+	ldebug.c \
+	linit.c \
+	loadlib.c \
+	lstate.c \
+	ltm.c \
+	lzio.c \
+	lcode.c \
+	ldo.c \
+	liolib.c \
+	lobject.c \
+	lstring.c \
+	lua.c \
+
+
+LOCAL_MODULE := liblua
+include $(BUILD_STATIC_LIBRARY)
+
 #############
 # Proxmark3 #
 #############
@@ -101,7 +136,8 @@ LOCAL_PATH := $(TOP_PATH)/proxmark3
 
 include $(CLEAR_VARS)
 
-LOCAL_SHARED_LIBRARIES := libusb libtermcap libreadline
+LOCAL_SHARED_LIBRARIES := libtermcap libreadline
+LOCAL_STATIC_LIBRARIES := liblua
 
 LOCAL_CFLAGS := -std=c99 -DCMIN=1 -DCTIME=0
 
@@ -110,42 +146,64 @@ $(LOCAL_PATH)/include \
 $(LOCAL_PATH)/common \
 $(LOCAL_PATH)/client \
 $(TOP_PATH)/ \
-$(TOP_PATH)/libusb
+$(TOP_PATH)/libusb \
+$(LOCAL_PATH)/liblua \
 
 LOCAL_SRC_FILES := \
-client/nonce2key/crapto1.c \
-client/nonce2key/crypto1.c \
-client/nonce2key/nonce2key.c \
-common/crc16.c \
-common/iso14443crc.c \
-common/iso15693tools.c \
-client/mifarehost.c \
-client/data.c \
-client/graph.c \
-client/ui.c \
-client/util.c \
-client/cmddata.c \
-client/cmdhf.c \
-client/cmdhf14a.c \
-client/cmdhf14b.c \
-client/cmdhf15.c \
-client/cmdhfepa.c \
-client/cmdhflegic.c \
-client/cmdhficlass.c \
-client/cmdhfmf.c \
-client/cmdhw.c \
-client/cmdlf.c \
-client/cmdlfem4x.c \
-client/cmdlfhid.c \
-client/cmdlfhitag.c \
-client/cmdlfti.c \
-client/cmdparser.c \
-client/cmdmain.c \
-client/guidummy.c \
-client/proxusb.c \
-client/proxmark3.c \
-client/cmdlft55xx.c \
-client/cmdlfpcf7931.c
+	client/uart.c \
+	client/util.c \
+	client/sleep.c \
+ 	client/nonce2key/crapto1.c\
+	client/nonce2key/crypto1.c\
+	client/nonce2key/nonce2key.c\
+	client/loclass/cipher.c \
+	client/loclass/cipherutils.c \
+	client/loclass/des.c \
+	client/loclass/ikeys.c \
+	client/loclass/elite_crack.c\
+	client/loclass/fileutils.c\
+	client/mifarehost.c\
+	common/crc.c \
+	common/crc16.c \
+	common/crc64.c \
+	common/iso14443crc.c \
+	common/iso15693tools.c \
+	client/data.c \
+	client/graph.c \
+	client/ui.c \
+	client/cmddata.c \
+	common/lfdemod.c \
+	client/cmdhf.c \
+	client/cmdhf14a.c \
+	client/cmdhf14b.c \
+	client/cmdhf15.c \
+	client/cmdhfepa.c \
+	client/cmdhflegic.c \
+	client/cmdhficlass.c \
+	client/cmdhfmf.c \
+	client/cmdhfmfu.c \
+	client/cmdhw.c \
+	client/cmdlf.c \
+	client/cmdlfio.c \
+	client/cmdlfhid.c \
+	client/cmdlfawid.c \
+	client/cmdlfem4x.c \
+	client/cmdlfhitag.c \
+	client/cmdlfti.c \
+	client/cmdparser.c \
+	client/cmdmain.c \
+	client/cmdlft55xx.c \
+	client/cmdlfpcf7931.c\
+	client/pm3_binlib.c\
+	client/scripting.c\
+	client/cmdscript.c\
+	client/pm3_bitlib.c\
+	client/aes.c\
+	common/protocols.c\
+	common/sha1.c\
+	client/guidummy.c \
+	client/proxmark3.c
+
 
 LOCAL_MODULE := proxmark3
 include $(BUILD_EXECUTABLE)
