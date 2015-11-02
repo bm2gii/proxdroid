@@ -1,12 +1,9 @@
 [submodule "proxmark3"]
 	path = proxmark3
-	url = https://github.com/marcv81/proxmark3.git
-[submodule "libusb"]
-	path = libusb
-	url = https://github.com/marcv81/libusb.git
+	url = https://github.com/bm2gii/proxmark3.git
 [submodule "termcap"]
 	path = termcap
-	url = https://github.com/marcv81/termcap.git
+	url = https://github.com/bm2gii/termcap.git
 [submodule "readline"]
 	path = readline
-	url = https://github.com/marcv81/readline.git
+	url = https://github.com/bm2gii/readline.git
