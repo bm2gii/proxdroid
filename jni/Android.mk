@@ -22,7 +22,8 @@ tparam.c \
 version.c
 
 LOCAL_MODULE := libtermcap
-include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 ################
 # Lib ReadLine #
@@ -32,7 +33,8 @@ LOCAL_PATH := $(TOP_PATH)/readline
 
 include $(CLEAR_VARS)
 
-LOCAL_SHARED_LIBRARIES := libtermcap
+#LOCAL_SHARED_LIBRARIES := libtermcap
+LOCAL_STATIC_LIBRARIES := libtermcap
 
 LOCAL_CFLAGS := \
 -DHAVE_CONFIG_H \
@@ -73,7 +75,8 @@ mbutil.c \
 tilde.c
 
 LOCAL_MODULE := libreadline
-include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 
 ################
@@ -136,8 +139,8 @@ LOCAL_PATH := $(TOP_PATH)/proxmark3
 
 include $(CLEAR_VARS)
 
-LOCAL_SHARED_LIBRARIES := libtermcap libreadline
-LOCAL_STATIC_LIBRARIES := liblua
+#LOCAL_SHARED_LIBRARIES := libtermcap libreadline
+LOCAL_STATIC_LIBRARIES := liblua libtermcap libreadline
 
 LOCAL_CFLAGS := -std=c99 -DCMIN=1 -DCTIME=0
 
