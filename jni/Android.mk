@@ -149,7 +149,6 @@ $(LOCAL_PATH)/include \
 $(LOCAL_PATH)/common \
 $(LOCAL_PATH)/client \
 $(TOP_PATH)/ \
-$(TOP_PATH)/libusb \
 $(LOCAL_PATH)/liblua \
 
 LOCAL_SRC_FILES := \
@@ -205,6 +204,7 @@ LOCAL_SRC_FILES := \
 	common/protocols.c\
 	common/sha1.c\
 	client/guidummy.c \
+	client/cmdhftopaz.c \
 	client/proxmark3.c
 
 
